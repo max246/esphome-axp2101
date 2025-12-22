@@ -130,7 +130,7 @@ void AXP2101Component::setup()
     PMU.enableDC5();
     PMU.enableALDO1();
     PMU.enableALDO2();
-    // PMU.enableALDO3(); // This is the speaker
+    PMU.enableALDO3(); // This is the speaker
     PMU.enableALDO4();
     PMU.enableBLDO1();
     PMU.enableBLDO2();
@@ -405,6 +405,15 @@ uint32_t AXP2101Component::Read32bit( uint8_t Addr )
 void AXP2101Component::ReadBuff( uint8_t Addr , uint8_t Size , uint8_t *Buff )
 {
     this->read_bytes(Addr, Buff, Size);
+}
+
+// SPEAKER on / off
+void AXP2101Component::set_speaker_enabled(bool on) {
+    if (on) {
+        PMU.enableALDO3();  // speaker on
+    } else {
+        PMU.disableALDO3(); // speaker off
+    }
 }
 
 void AXP2101Component::UpdateBrightness()

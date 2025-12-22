@@ -44,6 +44,8 @@ public:
   void dump_config() override;
   float get_setup_priority() const override;
   void update() override;
+  void set_speaker_enabled(bool on);
+
 
 private:
     static std::string GetStartupReason();
