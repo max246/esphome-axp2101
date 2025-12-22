@@ -32,15 +32,19 @@ enum AXP2101Model {
 
 class AXP2101Component : public PollingComponent, public i2c::I2CDevice {
 public:
-  void set_batteryvoltage_sensor(sensor::Sensor *batteryvoltage_sensor) { batteryvoltage_sensor_ = batteryvoltage_sensor; }
-  void set_batterylevel_sensor(sensor::Sensor *batterylevel_sensor) { batterylevel_sensor_ = batterylevel_sensor; }
-  void set_batterycharging_bsensor(binary_sensor::BinarySensor *batterycharging_bsensor) { batterycharging_bsensor_ = batterycharging_bsensor; }
+  void set_battery_voltage_sensor(sensor::Sensor *battery_voltage_sensor) { battery_voltage_sensor_ = battery_voltage_sensor; }
+  void set_battery_level_sensor(sensor::Sensor *battery_level_sensor) { battery_level_sensor_ = battery_level_sensor; }
+  void set_battery_charging_bsensor(binary_sensor::BinarySensor *battery_charging_bsensor) { battery_charging_bsensor_ = battery_charging_bsensor; }
   void set_brightness(float brightness) { brightness_ = brightness; }
+  void set_enable_ALDO3(bool status) { on_boot_ALDO3 = status; }
+  void set_enable_DLDO1(bool status) { on_boot_DLDO1 = status; }
+  void set_enable_DLDO2(bool status) { on_boot_DLDO2 = status; }
   void set_model(AXP2101Model model) { this->model_ = model; }
 
-  void setBackLight(bool on);
-  void setSpeakerEnabled(bool on);
-  void setChargingLedMode(std::string mode);
+
+  void set_back_light(bool on);
+  void set_speaker_enabled(bool on);
+  void set_charging_led_mode(std::string mode);
 
   // ========== INTERNAL METHODS ==========
   // (In most use cases you won't need these)
@@ -55,11 +59,14 @@ private:
     static std::string GetStartupReason();
 
 protected:
-    sensor::Sensor *batteryvoltage_sensor_;
-    sensor::Sensor *batterylevel_sensor_;
-    binary_sensor::BinarySensor *batterycharging_bsensor_;
+    sensor::Sensor *battery_voltage_sensor_;
+    sensor::Sensor *battery_level_sensor_;
+    binary_sensor::BinarySensor *battery_charging_bsensor_;
     float brightness_{1.0f};
     float curr_brightness_{-1.0f};
+    bool on_boot_ALDO3;
+    bool on_boot_DLDO1;
+    bool on_boot_DLDO2;
     AXP2101Model model_;
 
     /** M5Stack Core2 Values
@@ -67,65 +74,65 @@ protected:
      * LD03: Vibration Motor
      */
 
-    void  UpdateBrightness();
-    bool  GetBatState();
-    uint8_t  GetBatData();
+    void  update_brightness();
+    bool  get_bat_state();
+    uint8_t  get_bat_data();
 
-    void  EnableCoulombcounter(void);
-    void  DisableCoulombcounter(void);
-    void  StopCoulombcounter(void);
-    void  ClearCoulombcounter(void);
-    uint32_t GetCoulombchargeData(void);
-    uint32_t GetCoulombdischargeData(void);
-    float GetCoulombData(void);
+    void  enable_coulomb_counter(void);
+    void  DisableCoulomb_counter(void);
+    void  StopCoulomb_counter(void);
+    void  ClearCoulomb_counter(void);
+    uint32_t get_coulomb_charge_data(void);
+    uint32_t get_coulomb_discharge_data(void);
+    float get_coulomb_data(void);
 
-    uint16_t GetVbatData(void) __attribute__((deprecated));
-    uint16_t GetIchargeData(void) __attribute__((deprecated));
-    uint16_t GetIdischargeData(void) __attribute__((deprecated));
-    uint16_t GetTempData(void) __attribute__((deprecated));
-    uint32_t GetPowerbatData(void) __attribute__((deprecated));
-    uint16_t GetVinData(void) __attribute__((deprecated));
-    uint16_t GetIinData(void) __attribute__((deprecated));
-    uint16_t GetVusbinData(void) __attribute__((deprecated));
-    uint16_t GetIusbinData(void) __attribute__((deprecated));
-    uint16_t GetVapsData(void) __attribute__((deprecated));
-    uint8_t GetBtnPress(void);
+    uint16_t get_vbat_data(void) __attribute__((deprecated));
+    uint16_t get_icharge_data(void) __attribute__((deprecated));
+    uint16_t get_idischarge_data(void) __attribute__((deprecated));
+    uint16_t get_temp_data(void) __attribute__((deprecated));
+    uint32_t get_powerbat_data(void) __attribute__((deprecated));
+    uint16_t get_vin_data(void) __attribute__((deprecated));
+    uint16_t get_iin_data(void) __attribute__((deprecated));
+    uint16_t get_vusbin_data(void) __attribute__((deprecated));
+    uint16_t get_iusbin_data(void) __attribute__((deprecated));
+    uint16_t get_vaps_data(void) __attribute__((deprecated));
+    uint8_t  get_btn_press(void);
 
       // -- sleep
-    void SetSleep(void);
-    void DeepSleep(uint64_t time_in_us = 0);
-    void LightSleep(uint64_t time_in_us = 0);
+    void set_sleep(void);
+    void set_deep_sleep(uint64_t time_in_us = 0);
+    void set_light_sleep(uint64_t time_in_us = 0);
 
     // void SetChargeVoltage( uint8_t );
-    void  SetChargeCurrent( uint8_t );
-    float GetBatCurrent();
-    float GetVinVoltage();
-    float GetVinCurrent();
-    float GetVBusVoltage();
-    float GetVBusCurrent();
-    float GetTempInAXP2101();
-    float GetBatPower();
-    float GetBatChargeCurrent();
-    float GetAPSVoltage();
-    float GetBatCoulombInput();
-    float GetBatCoulombOut();
-    uint8_t GetWarningLevel(void);
-    void SetCoulombClear();
-    void SetLDO2( bool State );
-    void SetLDO3( bool State );
-    void SetAdcState(bool State);
+    void  set_charge_current( uint8_t );
+    float get_bat_current();
+    float get_vin_voltage();
+    float get_vin_current();
+    float get_vBus_voltage();
+    float get_vBus_current();
+    float get_temp_in_AXP2101();
+    float get_bat_power();
+    float get_bat_charge_current();
+    float get_aps_voltage();
+    float get_bat_coulomb_input();
+    float get_bat_coulomb_out();
+    uint8_t get_warning_level(void);
+    void set_coulomb_clear();
+    void set_LDO2( bool state );
+    void set_LDO3( bool state );
+    void set_adc_state(bool state);
 
-    void PowerOff();
+    void power_off();
 
 
-    void Write1Byte( uint8_t Addr ,  uint8_t Data );
-    uint8_t Read8bit( uint8_t Addr );
-    uint16_t Read12Bit( uint8_t Addr);
-    uint16_t Read13Bit( uint8_t Addr);
-    uint16_t Read16bit( uint8_t Addr );
-    uint32_t Read24bit( uint8_t Addr );
-    uint32_t Read32bit( uint8_t Addr );
-    void ReadBuff( uint8_t Addr , uint8_t Size , uint8_t *Buff );
+    void write_1byte( uint8_t addr ,  uint8_t data );
+    uint8_t read_8bit( uint8_t addr );
+    uint16_t read_12Bit( uint8_t addr);
+    uint16_t read_13Bit( uint8_t addr);
+    uint16_t read_16bit( uint8_t addr );
+    uint32_t read_24bit( uint8_t addr );
+    uint32_t read_32bit( uint8_t addr );
+    void read_buff( uint8_t addr , uint8_t size , uint8_t *buff );
 };
 
 }
