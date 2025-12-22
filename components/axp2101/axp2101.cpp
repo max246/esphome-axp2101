@@ -253,7 +253,7 @@ void AXP2101Component::setup()
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     * */
-    setChargingLedMode("CTRL_CHG");
+    set_charging_led_mode("CTRL_CHG");
 
 
     // Force add pull-up
