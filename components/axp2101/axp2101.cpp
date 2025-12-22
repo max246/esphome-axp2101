@@ -758,7 +758,7 @@ float AXP2101Component::get_bat_charge_current()
     return re_data * ADCLSB;
 }
 
-float AXP2101Component::get_APS_voltage()
+float AXP2101Component::get_aps_voltage()
 {
     float ADCLSB = 1.4  / 1000.0;
     uint16_t re_data = read_12bit( 0x7E );

@@ -56,7 +56,7 @@ public:
 
 
 private:
-    static std::string GetStartupReason();
+    static std::string get_startup_reason();
 
 protected:
     sensor::Sensor *battery_voltage_sensor_;
@@ -90,7 +90,7 @@ protected:
     uint16_t get_icharge_data(void) __attribute__((deprecated));
     uint16_t get_idischarge_data(void) __attribute__((deprecated));
     uint16_t get_temp_data(void) __attribute__((deprecated));
-    uint32_t get_powerbat_data(void) __attribute__((deprecated));
+    uint32_t get_power_bat_data(void) __attribute__((deprecated));
     uint16_t get_vin_data(void) __attribute__((deprecated));
     uint16_t get_iin_data(void) __attribute__((deprecated));
     uint16_t get_vusbin_data(void) __attribute__((deprecated));
