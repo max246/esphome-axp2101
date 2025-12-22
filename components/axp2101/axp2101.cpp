@@ -427,19 +427,19 @@ void AXP2101Component::setChargingLedMode(XPowersChgLed mode) {
     - XPOWERS_CHG_LED_CTRL_CHG,
     */
     switch (mode) {
-        case OFF:
+        case XPowersChgLed::OFF:
             PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
             break;
-        case BLINK_1HZ:
+        case XPowersChgLed::BLINK_1HZ:
             PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_1HZ);
             break;
-        case BLINK_4HZ:
+        case XPowersChgLed::BLINK_4HZ:
             PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
             break;
-        case ON:
+        case XPowersChgLed::ON:
             PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
             break;
-        case CTRL_CHG:
+        case XPowersChgLed::CTRL_CHG:
             PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
             break;
         default:

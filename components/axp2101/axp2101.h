@@ -45,14 +45,15 @@ public:
   void set_brightness(float brightness) { brightness_ = brightness; }
   void set_model(AXP2101Model model) { this->model_ = model; }
 
+  void setSpeakerEnabled(bool on);
+  void setChargingLedMode(XPowersChgLed mode);
+
   // ========== INTERNAL METHODS ==========
   // (In most use cases you won't need these)
   void setup() override;
   void dump_config() override;
   float get_setup_priority() const override;
   void update() override;
-  void setSpeakerEnabled(bool on);
-  void setChargingLedMode(XPowersChgLed mode);
 
 
 
