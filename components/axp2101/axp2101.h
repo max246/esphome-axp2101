@@ -32,6 +32,13 @@ enum AXP2101Model {
 
 class AXP2101Component : public PollingComponent, public i2c::I2CDevice {
 public:
+  enum class XPowersChgLed {
+    OFF,
+    BLINK_1HZ,
+    BLINK_4HZ,
+    ON,
+    CTRL_CHG
+  };
   void set_batteryvoltage_sensor(sensor::Sensor *batteryvoltage_sensor) { batteryvoltage_sensor_ = batteryvoltage_sensor; }
   void set_batterylevel_sensor(sensor::Sensor *batterylevel_sensor) { batterylevel_sensor_ = batterylevel_sensor; }
   void set_batterycharging_bsensor(binary_sensor::BinarySensor *batterycharging_bsensor) { batterycharging_bsensor_ = batterycharging_bsensor; }
@@ -44,7 +51,9 @@ public:
   void dump_config() override;
   float get_setup_priority() const override;
   void update() override;
-  void set_speaker_enabled(bool on);
+  void setSpeakerEnabled(bool on);
+  void setChargingLedMode(XPowersChgLed mode);
+
 
 
 private:

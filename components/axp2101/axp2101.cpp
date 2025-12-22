@@ -242,7 +242,8 @@ void AXP2101Component::setup()
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     * */
-    PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
+    //PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
+    setChargingLedMode(XPowersChgLed:OFF)
 
 
     // Force add pull-up
@@ -408,13 +409,45 @@ void AXP2101Component::ReadBuff( uint8_t Addr , uint8_t Size , uint8_t *Buff )
 }
 
 // SPEAKER on / off
-void AXP2101Component::set_speaker_enabled(bool on) {
+void AXP2101Component::setSpeakerEnabled(bool on) {
     if (on) {
         PMU.enableALDO3();  // speaker on
     } else {
         PMU.disableALDO3(); // speaker off
     }
 }
+
+// Set charging Led mode
+void AXP2101Component::setChargingLedMode(XPowersChgLed mode) {
+    /*
+    - XPOWERS_CHG_LED_OFF,
+    - XPOWERS_CHG_LED_BLINK_1HZ,
+    - XPOWERS_CHG_LED_BLINK_4HZ,
+    - XPOWERS_CHG_LED_ON,
+    - XPOWERS_CHG_LED_CTRL_CHG,
+    */
+    switch (mode) {
+        case OFF:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
+            break;
+        case BLINK_1HZ:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_1HZ);
+            break;
+        case BLINK_4HZ:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
+            break;
+        case ON:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
+            break;
+        case CTRL_CHG:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
+            break;
+        default:
+            PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
+            break;
+    }
+}
+
 
 void AXP2101Component::UpdateBrightness()
 {
