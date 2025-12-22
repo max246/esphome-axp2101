@@ -242,8 +242,7 @@ void AXP2101Component::setup()
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     * */
-    //PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
-    setChargingLedMode("OFF");
+    setChargingLedMode("CTRL_CHG");
 
 
     // Force add pull-up
@@ -408,6 +407,15 @@ void AXP2101Component::ReadBuff( uint8_t Addr , uint8_t Size , uint8_t *Buff )
     this->read_bytes(Addr, Buff, Size);
 }
 
+// Screen enable
+void AXP2101Component::setBackLight(bool on) {
+    if (on) {
+        PMU.enableBLDO1();  // backlight on
+    } else {
+        PMU.disableBLDO1(); // backlight off only
+    }
+}
+
 // SPEAKER on / off
 void AXP2101Component::setSpeakerEnabled(bool on) {
     if (on) {
@@ -426,8 +434,6 @@ void AXP2101Component::setChargingLedMode(std::string mode) {
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     */
-    ESP_LOGI("log" ,"SEtting something");
-
     if (mode == "OFF")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
     else if (mode == "BLINK_1HZ")
@@ -435,9 +441,7 @@ void AXP2101Component::setChargingLedMode(std::string mode) {
     else if (mode == "BLINK_4HZ")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
     else if (mode == "ON") {
-        PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
-    ESP_LOGI("log" ,"ONNN");
-}
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);}
     else if (mode == "CTRL_CHG")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
     else    

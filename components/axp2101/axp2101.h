@@ -38,6 +38,7 @@ public:
   void set_brightness(float brightness) { brightness_ = brightness; }
   void set_model(AXP2101Model model) { this->model_ = model; }
 
+  void setBackLight(bool on);
   void setSpeakerEnabled(bool on);
   void setChargingLedMode(std::string mode);
 
