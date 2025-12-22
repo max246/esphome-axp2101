@@ -426,15 +426,17 @@ void AXP2101Component::setChargingLedMode(std::string mode) {
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     */
-    ESP_LOGI("log" ,mode);
+
     if (mode == "OFF")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
     else if (mode == "BLINK_1HZ")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_1HZ);
     else if (mode == "BLINK_4HZ")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
-    else if (mode == "ON")
+    else if (mode == "ON") {
         PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
+    ESP_LOGI("log" ,"ONNN");
+}
     else if (mode == "CTRL_CHG")
         PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
     else    
