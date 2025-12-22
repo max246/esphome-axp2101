@@ -96,7 +96,7 @@ void AXP2101Component::setup()
 
     //ALDO3 IMAX=300mA
     //500~3500mV, 100mV/step,31steps
-    if (on_boot_ALDO3)
+    if (on_boot_ALDO3_)
         PMU.setALDO3Voltage(3300);
 
     //ALDO4 IMAX=300mA
@@ -117,12 +117,12 @@ void AXP2101Component::setup()
 
     //DLDO1 IMAX=300mA
     //500~3400mV, 100mV/step,29steps
-    if (on_boot_DLDO1)    
+    if (on_boot_DLDO1_)    
         PMU.setDLDO1Voltage(3300);
 
     //DLDO2 IMAX=300mA
     //500~1400mV, 50mV/step,2steps
-    if (on_boot_DLDO2)
+    if (on_boot_DLDO2_)
         PMU.setDLDO2Voltage(3300);
 
 
@@ -133,15 +133,15 @@ void AXP2101Component::setup()
     PMU.enableDC5();
     PMU.enableALDO1();
     PMU.enableALDO2();
-    if (on_boot_ALDO3)
+    if (on_boot_ALDO3_)
        PMU.enableALDO3(); // This is the speaker
     PMU.enableALDO4();
     PMU.enableBLDO1();
     PMU.enableBLDO2();
     PMU.enableCPUSLDO();
-    if (on_boot_DLDO1)    
+    if (on_boot_DLDO1_)    
         PMU.enableDLDO1(); // This is the vibration motor
-    if (on_boot_DLDO2)
+    if (on_boot_DLDO2_)
         PMU.enableDLDO2();
 
 
@@ -150,24 +150,24 @@ void AXP2101Component::setup()
     ESP_LOGCONFIG(TAG, "DC3  : %s   Voltage:%u mV",  PMU.isEnableDC3()  ? "+" : "-", PMU.getDC3Voltage());
     ESP_LOGCONFIG(TAG, "DC4  : %s   Voltage:%u mV",  PMU.isEnableDC4()  ? "+" : "-", PMU.getDC4Voltage());
     ESP_LOGCONFIG(TAG, "DC5  : %s   Voltage:%u mV",  PMU.isEnableDC5()  ? "+" : "-", PMU.getDC5Voltage());
-   // ESP_LOGCONFIG(TAG, "ALDO1: %s   Voltage:%u mV",  PMU.isEnableALDO1()  ? "+" : "-", PMU.getALDO1Voltage());
-   // ESP_LOGCONFIG(TAG, "ALDO2: %s   Voltage:%u mV",  PMU.isEnableALDO2()  ? "+" : "-", PMU.getALDO2Voltage());
-//    if (on_boot_ALDO3)
-//        ESP_LOGCONFIG(TAG, "ALDO3: %s   Voltage:%u mV",  PMU.isEnableALDO3()  ? "+" : "-", PMU.getALDO3Voltage());
-//    //ESP_LOGCONFIG(TAG, "ALDO4: %s   Voltage:%u mV",  PMU.isEnableALDO4()  ? "+" : "-", PMU.getALDO4Voltage());
+    ESP_LOGCONFIG(TAG, "ALDO1: %s   Voltage:%u mV",  PMU.isEnableALDO1()  ? "+" : "-", PMU.getALDO1Voltage());
+    ESP_LOGCONFIG(TAG, "ALDO2: %s   Voltage:%u mV",  PMU.isEnableALDO2()  ? "+" : "-", PMU.getALDO2Voltage());
+    if (on_boot_ALDO3_)
+        ESP_LOGCONFIG(TAG, "ALDO3: %s   Voltage:%u mV",  PMU.isEnableALDO3()  ? "+" : "-", PMU.getALDO3Voltage());
+    ESP_LOGCONFIG(TAG, "ALDO4: %s   Voltage:%u mV",  PMU.isEnableALDO4()  ? "+" : "-", PMU.getALDO4Voltage());
+
+    ESP_LOGCONFIG(TAG, "BLDO1: %s   Voltage:%u mV",  PMU.isEnableBLDO1()  ? "+" : "-", PMU.getBLDO1Voltage());
+    ESP_LOGCONFIG(TAG, "BLDO2: %s   Voltage:%u mV",  PMU.isEnableBLDO2()  ? "+" : "-", PMU.getBLDO2Voltage());
+    ESP_LOGCONFIG(TAG, "CPUSLDO: %s Voltage:%u mV",  PMU.isEnableCPUSLDO() ? "+" : "-", PMU.getCPUSLDOVoltage());
+    if (on_boot_DLDO1_)        
+        ESP_LOGCONFIG(TAG, "DLDO1: %s   Voltage:%u mV",  PMU.isEnableDLDO1()  ? "+" : "-", PMU.getDLDO1Voltage());
+    if (on_boot_DLDO2_)    
+        ESP_LOGCONFIG(TAG, "DLDO2: %s   Voltage:%u mV",  PMU.isEnableDLDO2()  ? "+" : "-", PMU.getDLDO2Voltage());
+
 //
-//    ESP_LOGCONFIG(TAG, "BLDO1: %s   Voltage:%u mV",  PMU.isEnableBLDO1()  ? "+" : "-", PMU.getBLDO1Voltage());
-//    ESP_LOGCONFIG(TAG, "BLDO2: %s   Voltage:%u mV",  PMU.isEnableBLDO2()  ? "+" : "-", PMU.getBLDO2Voltage());
-//    //ESP_LOGCONFIG(TAG, "CPUSLDO: %s Voltage:%u mV",  PMU.isEnableCPUSLDO() ? "+" : "-", PMU.getCPUSLDOVoltage());
-//    if (on_boot_DLDO1)        
-//        ESP_LOGCONFIG(TAG, "DLDO1: %s   Voltage:%u mV",  PMU.isEnableDLDO1()  ? "+" : "-", PMU.getDLDO1Voltage());
-//    if (on_boot_DLDO2)    
-//        ESP_LOGCONFIG(TAG, "DLDO2: %s   Voltage:%u mV",  PMU.isEnableDLDO2()  ? "+" : "-", PMU.getDLDO2Voltage());
-
-
-    ESP_LOGCONFIG(TAG, "Startup setting for ALDO3 : %s",  on_boot_ALDO3);    
-    ESP_LOGCONFIG(TAG, "Startup setting for DLDO1 : %s",  on_boot_DLDO1);    
-    ESP_LOGCONFIG(TAG, "Startup setting for DLDO2 : %s",  on_boot_DLDO2);
+    ESP_LOGCONFIG(TAG, "Startup setting for ALDO3 : %s",  YESNO(on_boot_ALDO3_));    
+    ESP_LOGCONFIG(TAG, "Startup setting for DLDO1 : %s",  YESNO(on_boot_DLDO1_));    
+    ESP_LOGCONFIG(TAG, "Startup setting for DLDO2 : %s",  YESNO(on_boot_DLDO2_));
 
     // Set the time of pressing the button to turn off
     PMU.setPowerKeyPressOffTime(XPOWERS_POWEROFF_4S);
@@ -474,19 +474,15 @@ void AXP2101Component::update_brightness()
     ESP_LOGD(TAG, "Brightness=%f (Curr: %f)", brightness_, curr_brightness_);
     curr_brightness_ = brightness_;
 
-    const uint8_t c_min = 7;
-    const uint8_t c_max = 12;
-    auto ubri = c_min + static_cast<uint8_t>(brightness_ * (c_max - c_min));
+    // Forcing to start from step 19 since the below steps are just full dark screen
+    const uint8_t step  = (int)roundf(clamp(brightness_, 0.0f, 1.0f) * 19.0f);
+    ESP_LOGD(TAG, "Brightness step =%d", step);
+    int output = (step * 100) + 2400;
 
-    if (ubri > c_max)
-    {
-        ubri = c_max;
-    }
     switch (this->model_) {
       case AXP2101_M5CORE2:
       {
-        uint8_t buf = read_8bit( 0x27 );
-        write_1byte( 0x27 , ((buf & 0x80) | (ubri << 3)) );
+        PMU.setBLDO1Voltage(output);
         break;
       }
     }

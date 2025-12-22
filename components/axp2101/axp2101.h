@@ -36,9 +36,9 @@ public:
   void set_battery_level_sensor(sensor::Sensor *battery_level_sensor) { battery_level_sensor_ = battery_level_sensor; }
   void set_battery_charging_bsensor(binary_sensor::BinarySensor *battery_charging_bsensor) { battery_charging_bsensor_ = battery_charging_bsensor; }
   void set_brightness(float brightness) { brightness_ = brightness; }
-  void set_enable_ALDO3(bool status) { on_boot_ALDO3 = status; }
-  void set_enable_DLDO1(bool status) { on_boot_DLDO1 = status; }
-  void set_enable_DLDO2(bool status) { on_boot_DLDO2 = status; }
+  void set_enable_ALDO3(bool status) { on_boot_ALDO3_ = status; }
+  void set_enable_DLDO1(bool status) { on_boot_DLDO1_ = status; }
+  void set_enable_DLDO2(bool status) { on_boot_DLDO2_ = status; }
   void set_model(AXP2101Model model) { this->model_ = model; }
 
 
@@ -53,10 +53,11 @@ public:
   float get_setup_priority() const override;
   void update() override;
 
-
+    
 
 private:
     static std::string get_startup_reason();
+
 
 protected:
     sensor::Sensor *battery_voltage_sensor_;
@@ -64,9 +65,10 @@ protected:
     binary_sensor::BinarySensor *battery_charging_bsensor_;
     float brightness_{1.0f};
     float curr_brightness_{-1.0f};
-    bool on_boot_ALDO3{false};
-    bool on_boot_DLDO1{false};
-    bool on_boot_DLDO2{false};
+    bool on_boot_ALDO3_{false};
+    bool on_boot_DLDO1_{false};
+    bool on_boot_DLDO2_{false};
+    
     AXP2101Model model_;
 
     /** M5Stack Core2 Values
