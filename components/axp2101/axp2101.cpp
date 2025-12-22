@@ -96,7 +96,7 @@ void AXP2101Component::setup()
 
     //ALDO3 IMAX=300mA
     //500~3500mV, 100mV/step,31steps
-    PMU.setALDO3Voltage(3300);
+    //PMU.setALDO3Voltage(3300);
 
     //ALDO4 IMAX=300mA
     //500~3500mV, 100mV/step,31steps
@@ -130,7 +130,7 @@ void AXP2101Component::setup()
     PMU.enableDC5();
     PMU.enableALDO1();
     PMU.enableALDO2();
-    PMU.enableALDO3(); // This is the speaker
+//    PMU.enableALDO3(); // This is the speaker
     PMU.enableALDO4();
     PMU.enableBLDO1();
     PMU.enableBLDO2();
