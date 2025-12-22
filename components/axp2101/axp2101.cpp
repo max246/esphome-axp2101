@@ -243,7 +243,7 @@ void AXP2101Component::setup()
     - XPOWERS_CHG_LED_CTRL_CHG,
     * */
     //PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
-    setChargingLedMode(XPowersChgLed::OFF);
+    setChargingLedMode("OFF");
 
 
     // Force add pull-up
@@ -418,7 +418,7 @@ void AXP2101Component::setSpeakerEnabled(bool on) {
 }
 
 // Set charging Led mode
-void AXP2101Component::setChargingLedMode(XPowersChgLed mode) {
+void AXP2101Component::setChargingLedMode(std::string mode) {
     /*
     - XPOWERS_CHG_LED_OFF,
     - XPOWERS_CHG_LED_BLINK_1HZ,
@@ -426,26 +426,18 @@ void AXP2101Component::setChargingLedMode(XPowersChgLed mode) {
     - XPOWERS_CHG_LED_ON,
     - XPOWERS_CHG_LED_CTRL_CHG,
     */
-    switch (mode) {
-        case XPowersChgLed::OFF:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
-            break;
-        case XPowersChgLed::BLINK_1HZ:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_1HZ);
-            break;
-        case XPowersChgLed::BLINK_4HZ:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
-            break;
-        case XPowersChgLed::ON:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
-            break;
-        case XPowersChgLed::CTRL_CHG:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
-            break;
-        default:
-            PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
-            break;
-    }
+    if (mode == "OFF")
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
+    else if (mode == "BLINK_1HZ")
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_1HZ);
+    else if (mode == "BLINK_4HZ"
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_BLINK_4HZ);
+    else if (mode == "ON")
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_ON);
+    else if (mode == "CTRL_CHG")
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_CTRL_CHG);
+    else    
+        PMU.setChargingLedMode(XPOWERS_CHG_LED_OFF);
 }
 
 
