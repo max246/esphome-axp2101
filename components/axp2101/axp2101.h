@@ -64,9 +64,9 @@ protected:
     binary_sensor::BinarySensor *battery_charging_bsensor_;
     float brightness_{1.0f};
     float curr_brightness_{-1.0f};
-    bool on_boot_ALDO3;
-    bool on_boot_DLDO1;
-    bool on_boot_DLDO2;
+    bool on_boot_ALDO3{false};
+    bool on_boot_DLDO1{false};
+    bool on_boot_DLDO2{false};
     AXP2101Model model_;
 
     /** M5Stack Core2 Values
@@ -103,7 +103,6 @@ protected:
     void set_deep_sleep(uint64_t time_in_us = 0);
     void set_light_sleep(uint64_t time_in_us = 0);
 
-    // void SetChargeVoltage( uint8_t );
     void  set_charge_current( uint8_t );
     float get_bat_current();
     float get_vin_voltage();
