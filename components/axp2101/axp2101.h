@@ -127,8 +127,8 @@ protected:
 
     void write_1byte( uint8_t addr ,  uint8_t data );
     uint8_t read_8bit( uint8_t addr );
-    uint16_t read_12Bit( uint8_t addr);
-    uint16_t read_13Bit( uint8_t addr);
+    uint16_t read_12bit( uint8_t addr);
+    uint16_t read_13bit( uint8_t addr);
     uint16_t read_16bit( uint8_t addr );
     uint32_t read_24bit( uint8_t addr );
     uint32_t read_32bit( uint8_t addr );
