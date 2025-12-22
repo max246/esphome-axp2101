@@ -42,7 +42,7 @@ public:
   void set_model(AXP2101Model model) { this->model_ = model; }
 
 
-  void set_back_light(bool on);
+  void set_backlight(bool on);
   void set_speaker_enabled(bool on);
   void set_charging_led_mode(std::string mode);
 
@@ -79,9 +79,9 @@ protected:
     uint8_t  get_bat_data();
 
     void  enable_coulomb_counter(void);
-    void  DisableCoulomb_counter(void);
-    void  StopCoulomb_counter(void);
-    void  ClearCoulomb_counter(void);
+    void  disable_coulomb_counter(void);
+    void  stop_coulomb_counter(void);
+    void  clear_coulomb_counter(void);
     uint32_t get_coulomb_charge_data(void);
     uint32_t get_coulomb_discharge_data(void);
     float get_coulomb_data(void);
@@ -108,8 +108,8 @@ protected:
     float get_bat_current();
     float get_vin_voltage();
     float get_vin_current();
-    float get_vBus_voltage();
-    float get_vBus_current();
+    float get_vbus_voltage();
+    float get_vbus_current();
     float get_temp_in_AXP2101();
     float get_bat_power();
     float get_bat_charge_current();
