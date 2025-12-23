@@ -29,6 +29,9 @@ MODELS = {
 AXP2101_MODEL = cv.enum(MODELS, upper=True, space="_")
 
 CONF_BATTERY_CHARGING = "battery_charging"
+CONF_ENABLE_ALDO3 = "enable_ALDO3"
+CONF_ENABLE_DLDO1 = "enable_DLDO1"
+CONF_ENABLE_DLDO2 = "enable_DLDO2"
 
 CONFIG_SCHEMA = (
     cv.Schema(
@@ -49,6 +52,9 @@ CONFIG_SCHEMA = (
                 device_class=DEVICE_CLASS_BATTERY_CHARGING,
             ),
             cv.Optional(CONF_BRIGHTNESS, default=1.0): cv.percentage,
+            cv.Optional(CONF_ENABLE_ALDO3, default=False): cv.boolean,
+            cv.Optional(CONF_ENABLE_DLDO1, default=False): cv.boolean,
+            cv.Optional(CONF_ENABLE_DLDO2, default=False): cv.boolean,
         }
     )
     .extend(cv.polling_component_schema("60s"))
@@ -68,18 +74,30 @@ def to_code(config):
     if CONF_BATTERY_VOLTAGE in config:
         conf = config[CONF_BATTERY_VOLTAGE]
         sens = yield sensor.new_sensor(conf)
-        cg.add(var.set_batteryvoltage_sensor(sens))
+        cg.add(var.set_battery_voltage_sensor(sens))
 
     if CONF_BATTERY_LEVEL in config:
         conf = config[CONF_BATTERY_LEVEL]
         sens = yield sensor.new_sensor(conf)
-        cg.add(var.set_batterylevel_sensor(sens))
+        cg.add(var.set_battery_level_sensor(sens))
 
     if CONF_BATTERY_CHARGING in config:
         conf = config[CONF_BATTERY_CHARGING]
         sens = yield binary_sensor.new_binary_sensor(conf)
-        cg.add(var.set_batterycharging_bsensor(sens))
+        cg.add(var.set_battery_charging_bsensor(sens))
 
     if CONF_BRIGHTNESS in config:
         conf = config[CONF_BRIGHTNESS]
         cg.add(var.set_brightness(conf))
+
+    if CONF_ENABLE_ALDO3 in config:
+        conf = config[CONF_ENABLE_ALDO3]
+        cg.add(var.set_enable_ALDO3(conf))
+
+    if CONF_ENABLE_DLDO1 in config:
+        conf = config[CONF_ENABLE_DLDO1]
+        cg.add(var.set_enable_DLDO1(conf))
+
+    if CONF_ENABLE_DLDO2 in config:
+        conf = config[CONF_ENABLE_DLDO2]
+        cg.add(var.set_enable_DLDO2(conf))
